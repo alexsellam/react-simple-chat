@@ -3,6 +3,16 @@ import './App.css'
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
 class App extends Component {
+  state = {
+    messages: {},
+    pseudo : this.props.match.params.pseudo
+  }
+
+  addMessage = message => {
+    const message = {...this.state.message}
+    messages[`message${Date.now()}`] = message 
+    this.setState({ messages })
+  }
   render () {
     return (
       <div className='box'>
@@ -10,7 +20,9 @@ class App extends Component {
           <Message />
           <Message />
         </div>
-        <Formulaire />
+        <Formulaire 
+        addMessage={this.addMessage}
+        pseudo={this.state.pseudo} />
       </div>
     )
   }
