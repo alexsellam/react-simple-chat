@@ -18,7 +18,7 @@ class App extends Component {
       .keys(this.state.messages)
       .map(key => (
         <Message
-        key={key}
+        key={key }
           message={this.state.messages[key].message}
           pseudo={this.state.messages[key].pseudo} />
       ) )
