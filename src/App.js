@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import './App.css'
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
-
+import './animation.css'
 //firebase
 import base from './base'
+
+import {
+  CSSTransition,
+  TransitionGroup
+} from 'react-transition-group'
 class App extends Component {
   state = {
     messages: {},
@@ -43,18 +48,25 @@ class App extends Component {
     const messages = Object
       .keys(this.state.messages)
       .map(key => (
-        <Message
-          key={key }
+        <CSSTransition
+          timeout={2000}
+          className='fade'
+          key={key}
+        >
+          
+           <Message
+        
           isUser={this.isUser}
           message={this.state.messages[key].message}
           pseudo={this.state.messages[key].pseudo} />
+        </CSSTransition>
       ) )
     return (
       <div className='box'>
         <div className='messages' ref={this.messagesRef}>
-         <div className='message'>
+         <TransitionGroup className='message'>
           {messages}
-         </div>
+         </TransitionGroup>
         </div>
         <Formulaire 
         length={140}
